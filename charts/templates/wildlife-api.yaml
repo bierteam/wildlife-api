@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wildlife-api
+  name: wildlife-api
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: wildlife-api
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: wildlife-api
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - image: bierteam/wildlife-api
+          envFrom:
+            - secretRef:
+                name: wildlife-api-env
+                optional: false
+          imagePullPolicy: Always
+          name: wildlife-api
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - "ALL"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wildlife-api
+spec:
+  selector:
+    app: wildlife-api
+  ports:
+    - port: 80
+      name: default
+      protocol: TCP
+      targetPort: 8080
