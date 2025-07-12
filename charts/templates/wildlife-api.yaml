@@ -22,7 +22,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: bierteam/wildlife-api
+        - image: ghcr.io/bierteam/wildlife-api:{{ .Values.image.tag }}
           envFrom:
             - secretRef:
                 name: wildlife-api-env
