@@ -1,5 +1,5 @@
 replicas: "2"
 
-fqdn: api.wildlife.ninoo.nl
+fqdn: api-wildlife.ninoo.nl
 image:
   tag: "sha-a956cb9"
