@@ -1,0 +1,53 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                SELECT s.id,\n                       COALESCE(t.name_en, s.name) AS name,\n                       s.scientific_name,\n                       s.observed_at,\n                       s.latitude,\n                       s.longitude\n                FROM species s\n                LEFT JOIN species_translations t ON s.scientific_name = t.scientific_name\n                WHERE ST_Contains(ST_GeomFromText($1, 4326), s.geom)\n                  AND s.scientific_name = $2\n                ORDER BY s.observed_at DESC\n                ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "scientific_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "observed_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 4,
+        "name": "latitude",
+        "type_info": "Float8"
+      },
+      {
+        "ordinal": 5,
+        "name": "longitude",
+        "type_info": "Float8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      null,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "266a7820da0669d5b2bbb5bbddd3876cf3fc7b8b7858c2a3eb232d3cd92d9edc"
+}

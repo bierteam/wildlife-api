@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n            SELECT s.id,\n                   COALESCE(t.name_en, s.name) AS name,\n                   s.scientific_name,\n                   s.observed_at,\n                   s.latitude,\n                   s.longitude\n            FROM species s\n            LEFT JOIN species_translations t ON s.scientific_name = t.scientific_name\n            WHERE ST_Contains(ST_GeomFromText($1, 4326), s.geom)\n            ORDER BY s.observed_at DESC\n            ",
+  "query": "\n                SELECT s.id,\n                       COALESCE(t.name_en, s.name) AS name,\n                       s.scientific_name,\n                       s.observed_at,\n                       s.latitude,\n                       s.longitude\n                FROM species s\n                LEFT JOIN species_translations t ON s.scientific_name = t.scientific_name\n                ORDER BY s.observed_at DESC\n                ",
   "describe": {
     "columns": [
       {
@@ -35,9 +35,7 @@
       }
     ],
     "parameters": {
-      "Left": [
-        "Text"
-      ]
+      "Left": []
     },
     "nullable": [
       false,
@@ -48,5 +46,5 @@
       false
     ]
   },
-  "hash": "4c0e962ffe5d596a539a57e5e19fd88674b8e40bc552af434691cd9456be5e62"
+  "hash": "532439d5f32e707cb1474064428473dd5b0ab25ba7ea94099df54f4962ea70fd"
 }

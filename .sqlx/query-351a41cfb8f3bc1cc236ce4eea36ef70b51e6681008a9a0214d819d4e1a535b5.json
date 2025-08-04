@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT DISTINCT scientific_name FROM species\n            WHERE ST_Contains(ST_GeomFromText($1, 4326), geom);\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "scientific_name",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "351a41cfb8f3bc1cc236ce4eea36ef70b51e6681008a9a0214d819d4e1a535b5"
+}

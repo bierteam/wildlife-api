@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT s.id,\n               COALESCE(t.name_en, s.name) AS name,\n               s.scientific_name,\n               s.observed_at,\n               s.latitude,\n               s.longitude\n        FROM species s\n        LEFT JOIN species_translations t ON s.scientific_name = t.scientific_name\n        ",
+  "query": "\n                SELECT s.id,\n                       COALESCE(t.name_en, s.name) AS name,\n                       s.scientific_name,\n                       s.observed_at,\n                       s.latitude,\n                       s.longitude\n                FROM species s\n                LEFT JOIN species_translations t ON s.scientific_name = t.scientific_name\n                WHERE s.scientific_name = $1\n                ORDER BY s.observed_at DESC\n                ",
   "describe": {
     "columns": [
       {
@@ -35,7 +35,9 @@
       }
     ],
     "parameters": {
-      "Left": []
+      "Left": [
+        "Text"
+      ]
     },
     "nullable": [
       false,
@@ -46,5 +48,5 @@
       false
     ]
   },
-  "hash": "2b71dc7b90b2e3375765cd01da5c81f31b442f7ea798f1275c98ed61750624f7"
+  "hash": "953a0fe1913c25d9f9f012f5ddc79bd252ddfd1fc1ef44efd34dd84a0d0e8ee2"
 }
