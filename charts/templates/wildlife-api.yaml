@@ -19,6 +19,10 @@ spec:
         app: wildlife-api
     spec:
       securityContext:
+        # the image declares no USER, so pin an unprivileged uid
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
         seccompProfile:
           type: RuntimeDefault
       containers:
