@@ -2,4 +2,4 @@ replicas: "2"
 
 fqdn: api-wildlife.ninoo.nl
 image:
-  tag: "sha-f27fa27"
+  tag: "sha-672aced"
